@@ -5,7 +5,7 @@ echo "List of sites, that will be checked by default - ${default_list[@]}"
 list_of_sites=()
 exit_char='e'
 default_char='d'
-logfile="./pinger.log"
+logfile="./website_status.log"
 
 read -p "Input name of site, that you want to ping (or enter 'e'/ENTER for exit, 'd' for pinging default sites list): " user_input
 
@@ -47,7 +47,7 @@ echo "Starting site checks"
 
 for item in "${list_of_sites[@]}"; do
     current_timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-    ping_result=$(curl -A "Mozilla/5.0 (compatible; MyPinger/1.0;)" -o /dev/null -s -L -w "%{http_code}\\n" $item)
+    ping_result=$(curl -A "Mozilla/5.0 (compatible;)" -o /dev/null -s -L -w "%{http_code}\\n" $item)
     if [[ "$ping_result" == "200" ]]; then
         final_result="<$item> is UP"
     else
